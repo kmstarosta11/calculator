@@ -18,8 +18,23 @@
 
       function calculate() {
         var expression = document.getElementById("result").value;
-        var answer = eval(expression);
-        document.getElementById("result").value = answer;
+        var operands = expression.match(/\d+/g);
+        var operators = expression.match(/[\+\-\*\/]/g);
+        var result = parseInt(operands[0]);
+        for (var i = 0; i < operators.length; i++) {
+          var operator = operators[i];
+          var operand = parseInt(operands[i + 1]);
+          if (operator === "+") {
+            result += operand;
+          } else if (operator === "-") {
+            result -= operand;
+          } else if (operator === "*") {
+            result *= operand;
+          } else if (operator === "/") {
+            result /= operand;
+          }
+        }
+        document.getElementById("result").value = result;
       }
     </script>
   </head>
@@ -48,8 +63,8 @@
       <input type="button" value="=" onclick="calculate()" />
       <input type="button" value="/" onclick="display('/')" />
     </form>
-	<footer>
-		<p>kmstarosta11 &copy; <script>document.write( new Date().getFullYear() );</script></p>
-	</footer>
+    <footer>
+      <p>kmstarosta11 &copy; <script>document.write( new Date().getFullYear() );</script></p>
+    </footer>
   </body>
 </html>
